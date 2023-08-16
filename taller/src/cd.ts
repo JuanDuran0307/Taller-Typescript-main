@@ -28,7 +28,7 @@ class Camper {
         this.nivelActual = nivel;
     }
 
-    obtenerContrato(tipo: 'remoto' | 'presencial') {
+    obtenerContrato(tipo: 'Remoto' | 'Presencial') {
         if (this.nivelActual !== null && !this.contratado) {
             this.contratado = true;
             return new Contrato(tipo, this);
@@ -39,7 +39,7 @@ class Camper {
   
 class Contrato {
     constructor(
-        public tipo: 'remoto' | 'presencial', 
+        public tipo: 'Remoto' | 'Presencial', 
         public camper: Camper
     ){}
 }
@@ -59,7 +59,7 @@ class Centro {
         return this.campers.find(camper => camper.nombre === nombre);
     }
 
-    obtenerCampersPorContrato(tipoContrato: 'remoto' | 'presencial') {
+    obtenerCampersPorContrato(tipoContrato: 'Remoto' | 'Presencial') {
         return this.campers.filter(camper => {
         const contrato = camper.obtenerContrato(tipoContrato);
         return contrato !== null;
@@ -98,12 +98,16 @@ const camper2 = new Camper('Javier Martinez');
 const camper3 = new Camper('Juan Durán');
 const camper4 = new Camper('Cristian arce');
 const camper5 = new Camper('Camilo garza');
+const camper6 = new Camper('Andres Martinez')
+const camper7 = new Camper('Camila Torres')
 
 camper1.avanzarNivel(nivelBasico);
 camper2.avanzarNivel(nivelIntermedio);
 camper3.avanzarNivel(nivelAvanzado);
 camper4.avanzarNivel(nivelBasico);
 camper5.avanzarNivel(nivelIntermedio);
+camper6.avanzarNivel(nivelAvanzado)
+camper7.avanzarNivel(nivelAvanzado)
 
 const centroEntrenamiento1 = new Centro('CampusLands');
 centroEntrenamiento1.agregarCamper(camper1);
@@ -112,20 +116,23 @@ centroEntrenamiento1.agregarCamper(camper3);
 const centroEntrenamiento2 = new Centro('CampusMedellin');
 centroEntrenamiento2.agregarCamper(camper4);
 centroEntrenamiento2.agregarCamper(camper5);
+const centroEntrenamiento3 = new Centro('CampusBogota');
+centroEntrenamiento3.agregarCamper(camper6);
+centroEntrenamiento3.agregarCamper(camper7);
 
 
-const contrato1 = camper1.obtenerContrato('remoto');
-const contrato2 = camper2.obtenerContrato('presencial');
-const contrato3 = camper3.obtenerContrato('remoto');
-const contrato4 = camper4.obtenerContrato('remoto');
-const contrato5 = camper5.obtenerContrato('presencial');
-const centrosEntrenamiento: Centro[] = [centroEntrenamiento1, centroEntrenamiento2];
+const contrato1 = camper1.obtenerContrato('Presencial');
+const contrato2 = camper2.obtenerContrato('Remoto');
+const contrato3 = camper3.obtenerContrato('Remoto');
+const contrato4 = camper4.obtenerContrato('Remoto');
+const contrato5 = camper5.obtenerContrato('Presencial');
+const centrosEntrenamiento: Centro[] = [centroEntrenamiento1, centroEntrenamiento2,centroEntrenamiento3];
 const centroConMayorMenorCampers = centrosEntrenamiento[0].obtenerCentroConMayorMenorCampers();
 
-console.log('Camper 1:', contrato1);
-console.log('Camper 2:', contrato2);
-console.log('Camper 3:', contrato3);
-console.log('Camper 4:', contrato4);
-console.log('Camper 5:', contrato5);
+console.log(contrato1);
+console.log(contrato2);
+console.log(contrato3);
+console.log(contrato4);
+console.log(contrato5);
 console.log('Centro con más campers:', centroConMayorMenorCampers.mayor?.nombre);
 console.log('Centro con menos campers:', centroConMayorMenorCampers.menor?.nombre);
